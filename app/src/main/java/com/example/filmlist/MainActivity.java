@@ -22,9 +22,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         setContentView(R.layout.activity_main);
         listFragment = new ListFragment();
         filmFragment = new FilmFragment();
+        fTrans = getSupportFragmentManager().beginTransaction();
+        fTrans.add(R.id.ListFragment,  MainActivity.listFragment);
+        fTrans.commit();
 
     }
 }

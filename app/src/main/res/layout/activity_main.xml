@@ -8,13 +8,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <fragment
-            android:id="@+id/ListFragment"
-            android:name="com.example.filmlist.list_screen.ListFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/ListFragment">
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

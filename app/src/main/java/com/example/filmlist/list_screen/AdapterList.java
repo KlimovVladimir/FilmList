@@ -57,7 +57,9 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 @Override
                 public void onClick(View v) {
                     MainActivity.fTrans = MainActivity.getInstance().getSupportFragmentManager().beginTransaction();
-                    MainActivity.fTrans.add(R.id.ListFragment,  MainActivity.filmFragment);
+                    MainActivity.fTrans.replace(R.id.ListFragment,  MainActivity.filmFragment);
+                    MainActivity.fTrans.addToBackStack(null);
+                    MainActivity.fTrans.commit();
                 }
             });
         }
