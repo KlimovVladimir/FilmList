@@ -7,15 +7,27 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.filmlist.MainActivity;
 import com.example.filmlist.R;
 import com.example.filmlist.items.Film;
 import com.example.filmlist.items.Genre;
 import com.example.filmlist.items.Header;
+import com.example.filmlist.json.Message;
+import com.example.filmlist.json.MessagesApi;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListFragment extends Fragment {
 
@@ -37,7 +49,6 @@ public class ListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.RecyclerView);
 
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
-
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {

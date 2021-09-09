@@ -1,8 +1,10 @@
 package com.example.filmlist.list_screen;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -69,6 +71,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 Film film = (Film)items.get(position);
                 //holder.header2.setVisibility(isSecondItem == false? View.VISIBLE: View.GONE);
                 holder.film_name.setText(film.getLocalizedName());
+                holder.img.getSettings().setJavaScriptEnabled(true);
+                holder.img.loadUrl("https://i.picsum.photos/id/977/200/300.jpg?hmac=YYtcm39X8v9y0KYAb_9s-ufIz_R0Kgbt_EP0F8-jkFU");
                 isSecondItem = true;
                 holder.film_name.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -100,12 +104,14 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
     static class ListViewHolder extends RecyclerView.ViewHolder {
 
         TextView header, genre, film_name;
+        WebView img;
 
         public ListViewHolder(View itemView) {
             super(itemView);
             header = itemView.findViewById(R.id.header);
             genre = itemView.findViewById(R.id.genre);
             film_name = itemView.findViewById(R.id.film_name);
+            img = itemView.findViewById(R.id.image);
 
             /*film_name.setOnClickListener(new View.OnClickListener() {
                 @Override
