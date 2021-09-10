@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import com.example.filmlist.MainActivity;
@@ -36,6 +37,7 @@ public class ListFragment extends Fragment {
     private final int FILM = 2;
 
     private RecyclerView recyclerView;
+    public AdapterList adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,7 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
+        MainActivity.getInstance().setTitle("Главная");
         recyclerView = view.findViewById(R.id.RecyclerView);
 
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
@@ -62,7 +65,8 @@ public class ListFragment extends Fragment {
         });
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new AdapterList(MainActivity.getInstance().items));
+        adapter = new AdapterList(MainActivity.getInstance().items);
+        recyclerView.setAdapter(adapter);
         return view;
     }
 }

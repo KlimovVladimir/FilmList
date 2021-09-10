@@ -3,9 +3,11 @@ package com.example.filmlist;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toolbar;
 
 import com.example.filmlist.items.Film;
 import com.example.filmlist.items.Genre;
@@ -38,11 +40,15 @@ public class MainActivity extends AppCompatActivity {
     public Retrofit retrofit;
     public MessagesApi messagesApi;
     public Call<Films> messages;
+    public static long selectedFilm = 0;
 
-    boolean loading = false;
+    public static int start_films = 0;
+    public static int end_films = 0;
 
-    public ArrayList <Item> items = new ArrayList();
-    public ArrayList <Message> response_json = new ArrayList();
+    public ArrayList<Item> items = new ArrayList();
+    public ArrayList<Film> films = new ArrayList();
+    public ArrayList<String> genres = new ArrayList();
+    public ArrayList<Message> response_json = new ArrayList();
 
     public static MainActivity getInstance() {
         return instance;
@@ -53,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         instance = this;
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        // ActionBar actionBar = getActionBar();
+        // actionBar.setDisplayHomeAsUpEnabled(false);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://s3-eu-west-1.amazonaws.com/sequeniatesttask/")
@@ -67,53 +77,37 @@ public class MainActivity extends AppCompatActivity {
                 //response_json.addAll(response.body());
                 //response.body().getFilms().get(0).getLocalizedName()
                 response_json.addAll(response.body().getFilms());
-                Log.i(TAG,  Integer.toString(response.code()) + " " +response_json.size() + response_json.get(16).getLocalizedName());
-                MainActivity.getInstance().loading = true;
+                Log.i(TAG, Integer.toString(response.code()) + " " + response_json.size() + response_json.get(16).getLocalizedName());
                 init();
                 listFragment = new ListFragment();
                 filmFragment = new FilmFragment();
                 fTrans = getSupportFragmentManager().beginTransaction();
-                fTrans.add(R.id.ListFragment,  MainActivity.listFragment);
+                fTrans.add(R.id.ListFragment, MainActivity.listFragment);
                 fTrans.commit();
             }
 
             @Override
             public void onFailure(Call<Films> call, Throwable t) {
-                Log.i(TAG, "kapec" );
+                Log.i(TAG, "kapec");
             }
         });
-
-        /*while(!loading) {
-
-        }
-        init();
-        listFragment = new ListFragment();
-        filmFragment = new FilmFragment();
-        fTrans = getSupportFragmentManager().beginTransaction();
-        fTrans.add(R.id.ListFragment,  MainActivity.listFragment);
-        fTrans.commit();*/
-
     }
 
-    private void init() {
+    public void init() {
 
-        //Header header1 = new Header("Жанры", 0, 1);
-        //Header header2 = new Header("Фильмы", 0, 2);
-        //items.add(header1);
-        for (int i=0; i < 1; i++){
-            //Message message = response_json.get(i);
-            Header header = new Header("header ", 0, i);
-            Genre genre = new Genre("genre " + i, 1, i );
-            //Film film = new Film(2, i,  response_json.get(i).getLocalizedName(),"genre ", 1, 1, "genre ","genre ", "genre ");
-            //Film film = new Film(2, i, response_json.get(i).getLocalizedName(), "name", 1, 1, "message.getImage_url()", "message.getDescription()", "message.getGenres()");
-
-            items.add(header);
+        Header header1 = new Header("Жанры", 0, 1);
+        Header header2 = new Header("Фильмы", 0, 2);
+        items.add(header1);
+        for (int i = 0; i < response_json.size(); i++) {
+            for (int j = 0; j < response_json.get(i).getGenres().size(); j++) {
+                if (!genres.contains(response_json.get(i).getGenres().get(j))) {
+                    genres.add(response_json.get(i).getGenres().get(j));
+                }
+            }
+        }
+        for (int i = 0; i < genres.size(); i++) {
+            Genre genre = new Genre(genres.get(i), 1, i);
             items.add(genre);
-            items.add(genre);
-            items.add(header);
-            //items.add(film);
-           // items.add(film);
-
             /*  Collections.sort(items, new Comparator<Item>() {
                 public int compare(Item o1, Item o2) {
 
@@ -122,11 +116,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });*/
         }
-        //items.add(header2);
-        for (int i=0; i < response_json.size(); i++){
-            Film film = new Film(2, i, response_json.get(i).getLocalizedName(), response_json.get(i).getName(), response_json.get(i).getYear(), response_json.get(i).getRating(),
-                    response_json.get(i).getImageUrl(), response_json.get(i).getDescription(), "message.getGenres()");
+        items.add(header2);
+        start_films = items.size();
+        for (int i = 0; i < response_json.size(); i++) {
+            Film film = new Film(2, response_json.get(i).getId(), response_json.get(i).getLocalizedName(), response_json.get(i).getName(), response_json.get(i).getYear(), response_json.get(i).getRating(),
+                    response_json.get(i).getImageUrl(), response_json.get(i).getDescription(), response_json.get(i).getGenres());
             items.add(film);
+            films.add(film);
         }
+        end_films = items.size();
     }
 }

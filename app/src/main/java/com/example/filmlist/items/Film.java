@@ -1,5 +1,7 @@
 package com.example.filmlist.items;
 
+import java.util.List;
+
 public class Film implements Item {
     private int type;
     private long id;
@@ -10,9 +12,9 @@ public class Film implements Item {
     private double rating;
     private String image_url;
     private String description;
-    private String genres;
+    public List<String> genres;
 
-    public Film(int type, long id, String localized_name, String name, int year, double rating, String image_url, String description, String genres) {
+    public Film(int type, long id, String localized_name, String name, int year, double rating, String image_url, String description, List<String> genres) {
         this.type = type;
         this.id = id;
 
@@ -92,11 +94,11 @@ public class Film implements Item {
         this.description = description;
     }
 
-    public String getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(String genres) {
+    public void setGenres(List<String> genres) {
         this.genres = genres;
     }
 }
