@@ -112,13 +112,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < genres.size(); i++) {
             Genre genre = new Genre(genres.get(i), 1, i);
             items.add(genre);
-            /*  Collections.sort(items, new Comparator<Item>() {
-                public int compare(Item o1, Item o2) {
-
-                    if (o1.getID() == o2.getID()) return o1.getItemType() - o2.getItemType();
-                    else return (int) (o1.getID() - o2.getID());
-                }
-            });*/
         }
         end_genres = items.size();
         items.add(header2);
@@ -126,8 +119,16 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < response_json.size(); i++) {
             Film film = new Film(2, response_json.get(i).getId(), response_json.get(i).getLocalizedName(), response_json.get(i).getName(), response_json.get(i).getYear(), response_json.get(i).getRating(),
                     response_json.get(i).getImageUrl(), response_json.get(i).getDescription(), response_json.get(i).getGenres());
-            items.add(film);
+            //items.add(film);
             films.add(film);
+        }
+        Collections.sort(films, new Comparator<Film>() {
+            public int compare(Film o1, Film o2) {
+                return o1.getLocalizedName().compareTo(o2.getLocalizedName());
+            }
+        });
+        for (int i = 0; i < films.size(); i++) {
+            items.add(films.get(i));
         }
         end_films = items.size();
     }
