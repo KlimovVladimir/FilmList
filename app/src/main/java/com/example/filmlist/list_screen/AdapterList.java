@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.filmlist.MainActivity;
@@ -115,9 +116,9 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                     }
                 });
                 if (row_index == position)
-                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(R.color.light_blue));
+                    holder.genre_back.setBackground(ContextCompat.getDrawable(MainActivity.getInstance().getApplicationContext(), R.drawable.shape_blue));
                 else
-                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(R.color.light_gray));
+                    holder.genre_back.setBackground(ContextCompat.getDrawable(MainActivity.getInstance().getApplicationContext(), R.drawable.shape));
                 break;
             case FILM:
                 Film film = (Film) items.get(position);

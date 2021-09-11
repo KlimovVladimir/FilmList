@@ -5,7 +5,7 @@
     android:layout_width="250dp"
     android:layout_height="40dp"
     android:orientation="horizontal"
-    android:background="@color/teal_200"
+    android:background="@drawable/shape"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp">
 
@@ -16,6 +16,7 @@
         android:layout_gravity="center"
         tools:text="Film genre"
         android:textColor="@color/white"
+        android:paddingTop="2dp"
         android:textSize="18dp"/>
 
 </FrameLayout>
