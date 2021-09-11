@@ -2,6 +2,7 @@ package com.example.filmlist.list_screen;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,6 +50,7 @@ public class ListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         MainActivity.getInstance().setTitle("Главная");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         recyclerView = view.findViewById(R.id.RecyclerView);
 
         GridLayoutManager layoutManager = new GridLayoutManager(view.getContext(), 2);
