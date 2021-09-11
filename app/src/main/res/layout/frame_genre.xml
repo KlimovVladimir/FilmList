@@ -6,13 +6,16 @@
     android:layout_height="40dp"
     android:orientation="horizontal"
     android:background="@color/teal_200"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp">
 
     <TextView
         android:id="@+id/genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:text="Film genre" />
+        tools:text="Film genre"
+        android:textColor="@color/white"
+        android:textSize="18dp"/>
 
 </FrameLayout>

@@ -115,9 +115,9 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                     }
                 });
                 if (row_index == position)
-                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(android.R.color.holo_purple));
+                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(R.color.light_blue));
                 else
-                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(android.R.color.holo_blue_bright));
+                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(R.color.light_gray));
                 break;
             case FILM:
                 Film film = (Film) items.get(position);

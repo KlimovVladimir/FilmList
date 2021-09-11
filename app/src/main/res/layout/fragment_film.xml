@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
 
                 <ImageView
                     android:id="@+id/imageViewFrame"
@@ -46,20 +47,26 @@
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name" />
+                    android:text="Name"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"/>
 
                 <TextView
                     android:id="@+id/textViewYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Year"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"/>
                 <TextView
                     android:id="@+id/textViewRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rating"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -75,7 +82,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description"
-                android:paddingLeft="5dp"/>
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/white"
+                android:textSize="16dp"/>
         </LinearLayout>
     </LinearLayout>
 

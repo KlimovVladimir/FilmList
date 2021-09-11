@@ -45,8 +45,8 @@ public class FilmFragment extends Fragment {
         img = view.findViewById(R.id.imageViewFrame);
 
         name.setText(film.getName());
-        year.setText(Integer.toString(film.getYear()));
-        rating.setText(Double.toString(film.getRating()));
+        year.setText("Год: " + Integer.toString(film.getYear()));
+        rating.setText("Рейтинг: " + Double.toString(film.getRating()));
         descripton.setText(film.getDescription());
 
         Picasso.get()
