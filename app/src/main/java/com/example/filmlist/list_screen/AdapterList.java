@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,17 +19,13 @@ import com.example.filmlist.items.Item;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder> {
-    private Random random;
     private final int HEADER = 0;
     private final int GENRE = 1;
     private final int FILM = 2;
     boolean isSecondItem = false;
     private ArrayList<Item> items;
-
-    private static final String TAG = "123123";
 
 
     public AdapterList(ArrayList<Item> items) {
@@ -82,10 +77,9 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
 
                         for (int i = 0; i < MainActivity.getInstance().films.size(); i++) {
                             for (int j = 0; j < MainActivity.getInstance().films.get(i).getGenres().size(); j++) {
-                                if (MainActivity.getInstance().films.get(i).getGenres().get(j) == genre.getGenre()) {
+                                if (MainActivity.getInstance().films.get(i).getGenres().get(j).equals(genre.getGenre())) {
                                     insert_films.add(MainActivity.getInstance().films.get(i));
-                                    Log.i(TAG, MainActivity.getInstance().films.get(i).getGenres().get(j));
-                                    //break;
+                                    break;
                                 }
                             }
                         }
