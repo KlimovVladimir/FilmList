@@ -10,7 +10,6 @@
                 android:tint="@color/light_blue">
                 <corners android:radius="10dp"/>
                 <solid android:color="@color/light_blue"/>
-                <padding android:bottom="6dp"/>
             </shape>
         </item>
     </ripple>
