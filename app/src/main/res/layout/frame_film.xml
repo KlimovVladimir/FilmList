@@ -37,7 +37,8 @@
             android:layout_marginBottom="13dp"
             android:text="Film Name"
             android:textAlignment="center"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="20dp"/>
 
 
 

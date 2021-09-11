@@ -28,9 +28,8 @@ public class FilmFragment extends Fragment {
         ImageView img;
 
         Film film = null;
-        for(int i = 0; i < MainActivity.getInstance().films.size(); i++)
-        {
-            film = (Film)MainActivity.getInstance().films.get(i);
+        for (int i = 0; i < MainActivity.getInstance().films.size(); i++) {
+            film = (Film) MainActivity.getInstance().films.get(i);
             if (film.getID() == MainActivity.getInstance().selectedFilm) {
                 break;
             }
@@ -52,12 +51,13 @@ public class FilmFragment extends Fragment {
 
         Picasso.get()
                 .load(film.getImage_url())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.ic_no_poster)
+                .error(R.drawable.ic_no_poster)
                 .into(img);
 
         return view;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -39,6 +39,7 @@ public class ListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     public AdapterList adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

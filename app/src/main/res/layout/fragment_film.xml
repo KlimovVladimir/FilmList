@@ -25,12 +25,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
 
                 <ImageView
                     android:id="@+id/imageViewFrame"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/ic_launcher_background" />
             </LinearLayout>
 
@@ -38,27 +39,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="60dp">
+                android:paddingLeft="60dp"
+                android:paddingTop="10dp">
 
                 <TextView
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Name" />
 
                 <TextView
                     android:id="@+id/textViewYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Year" />
+                    android:text="Year"
+                    android:paddingTop="10dp"/>
                 <TextView
                     android:id="@+id/textViewRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Rating" />
+                    android:text="Rating"
+                    android:paddingTop="10dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -66,13 +67,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/textViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description" />
+                android:text="Description"
+                android:paddingLeft="5dp"/>
         </LinearLayout>
     </LinearLayout>
 

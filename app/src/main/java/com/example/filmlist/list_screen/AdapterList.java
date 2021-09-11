@@ -69,7 +69,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.genre.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        row_index=position;
+                        row_index = position;
                         notifyDataSetChanged();
                         //data.subList(startIndex, endIndex).clear();
                         //adapter.notifyItemRangeRemoved(startIndex, count);
@@ -94,7 +94,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.genre_back.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        row_index=position;
+                        row_index = position;
                         notifyDataSetChanged();
                         ArrayList<Film> insert_films = new ArrayList<>();
                         int count = MainActivity.end_films - MainActivity.start_films;
@@ -114,18 +114,22 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                         MainActivity.end_films = MainActivity.getInstance().items.size();
                     }
                 });
-                if(row_index==position)
+                if (row_index == position)
                     holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(android.R.color.holo_purple));
                 else
                     holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(android.R.color.holo_blue_bright));
                 break;
             case FILM:
                 Film film = (Film) items.get(position);
-                holder.film_name.setText(film.getLocalizedName());
+                String locname = film.getLocalizedName();
+                if (locname.length() > 27) {
+                    locname = locname.substring(0, 27) + "..";
+                }
+                    holder.film_name.setText(locname);
                 Picasso.get()
                         .load(film.getImage_url())
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.drawable.ic_no_poster)
+                        .error(R.drawable.ic_no_poster)
                         .into(holder.img);
                 holder.film_name.setOnClickListener(new View.OnClickListener() {
                     @Override
