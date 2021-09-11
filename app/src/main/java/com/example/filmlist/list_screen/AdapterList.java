@@ -1,9 +1,11 @@
 package com.example.filmlist.list_screen;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,8 +26,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
     private final int HEADER = 0;
     private final int GENRE = 1;
     private final int FILM = 2;
-    boolean isSecondItem = false;
     private ArrayList<Item> items;
+    private int row_index;
 
 
     public AdapterList(ArrayList<Item> items) {
@@ -60,7 +62,6 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
             case HEADER:
                 Header header = (Header) items.get(position);
                 holder.header.setText(header.getTitle());
-                isSecondItem = false;
                 break;
             case GENRE:
                 Genre genre = (Genre) items.get(position);
@@ -68,6 +69,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.genre.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        row_index=position;
+                        notifyDataSetChanged();
                         //data.subList(startIndex, endIndex).clear();
                         //adapter.notifyItemRangeRemoved(startIndex, count);
                         ArrayList<Film> insert_films = new ArrayList<>();
@@ -88,20 +91,42 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                         MainActivity.end_films = MainActivity.getInstance().items.size();
                     }
                 });
+                holder.genre_back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        row_index=position;
+                        notifyDataSetChanged();
+                        ArrayList<Film> insert_films = new ArrayList<>();
+                        int count = MainActivity.end_films - MainActivity.start_films;
+                        MainActivity.getInstance().items.subList(MainActivity.start_films, MainActivity.end_films).clear();
+                        MainActivity.listFragment.adapter.notifyItemRangeRemoved(MainActivity.start_films, count);
+
+                        for (int i = 0; i < MainActivity.getInstance().films.size(); i++) {
+                            for (int j = 0; j < MainActivity.getInstance().films.get(i).getGenres().size(); j++) {
+                                if (MainActivity.getInstance().films.get(i).getGenres().get(j).equals(genre.getGenre())) {
+                                    insert_films.add(MainActivity.getInstance().films.get(i));
+                                    break;
+                                }
+                            }
+                        }
+                        MainActivity.getInstance().items.addAll(MainActivity.start_films, insert_films);
+                        MainActivity.listFragment.adapter.notifyItemRangeInserted(MainActivity.start_films, MainActivity.getInstance().items.size());
+                        MainActivity.end_films = MainActivity.getInstance().items.size();
+                    }
+                });
+                if(row_index==position)
+                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(android.R.color.holo_purple));
+                else
+                    holder.genre_back.setBackgroundColor(MainActivity.getInstance().getResources().getColor(android.R.color.holo_blue_bright));
                 break;
             case FILM:
                 Film film = (Film) items.get(position);
-                //holder.header2.setVisibility(isSecondItem == false? View.VISIBLE: View.GONE);
                 holder.film_name.setText(film.getLocalizedName());
                 Picasso.get()
                         .load(film.getImage_url())
                         .placeholder(R.drawable.ic_launcher_background)
                         .error(R.drawable.ic_launcher_background)
                         .into(holder.img);
-                //holder.img.loadUrl(film.getImage_url());
-                //holder.img.getSettings().setJavaScriptEnabled(true);
-                //holder.img.loadUrl("https://i.picsum.photos/id/977/200/300.jpg?hmac=YYtcm39X8v9y0KYAb_9s-ufIz_R0Kgbt_EP0F8-jkFU");
-                isSecondItem = true;
                 holder.film_name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -155,6 +180,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
         TextView header, genre, film_name;
         ImageView img;
         View view;
+        FrameLayout genre_back;
 
         public ListViewHolder(View itemView) {
             super(itemView);
@@ -163,6 +189,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
             film_name = itemView.findViewById(R.id.film_name);
             img = itemView.findViewById(R.id.image);
             view = itemView.findViewById(R.id.view);
+            genre_back = itemView.findViewById(R.id.genre_back);
             /*film_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public static int start_films = 0;
     public static int end_films = 0;
 
+    public static int start_genres = 0;
+    public static int end_genres = 0;
+
     public ArrayList<Item> items = new ArrayList();
     public ArrayList<Film> films = new ArrayList();
     public ArrayList<String> genres = new ArrayList();
@@ -105,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        start_genres = items.size();
         for (int i = 0; i < genres.size(); i++) {
             Genre genre = new Genre(genres.get(i), 1, i);
             items.add(genre);
@@ -116,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });*/
         }
+        end_genres = items.size();
         items.add(header2);
         start_films = items.size();
         for (int i = 0; i < response_json.size(); i++) {
