@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         // actionBar.setDisplayHomeAsUpEnabled(false);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://s3-eu-west-1.amazonaws.com/sequeniatesttask/")
+                .baseUrl("https://s3-eu-west-1.amazonaws.com/sequeniatesttask/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         messagesApi = retrofit.create(MessagesApi.class);
