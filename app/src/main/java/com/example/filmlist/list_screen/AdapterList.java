@@ -28,7 +28,6 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
     private final int GENRE = 1;
     private final int FILM = 2;
     private ArrayList<Item> items;
-    private int row_index;
 
 
     public AdapterList(ArrayList<Item> items) {
@@ -70,7 +69,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.genre.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        row_index = position;
+                        MainActivity.selectedGenre = position;
                         notifyDataSetChanged();
                         //data.subList(startIndex, endIndex).clear();
                         //adapter.notifyItemRangeRemoved(startIndex, count);
@@ -95,7 +94,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.genre_back.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        row_index = position;
+                        MainActivity.selectedGenre = position;
                         notifyDataSetChanged();
                         ArrayList<Film> insert_films = new ArrayList<>();
                         int count = MainActivity.end_films - MainActivity.start_films;
@@ -115,7 +114,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                         MainActivity.end_films = MainActivity.getInstance().items.size();
                     }
                 });
-                if (row_index == position)
+                if (MainActivity.selectedGenre == position)
                     holder.genre_back.setBackground(ContextCompat.getDrawable(MainActivity.getInstance().getApplicationContext(), R.drawable.shape_blue));
                 else
                     holder.genre_back.setBackground(ContextCompat.getDrawable(MainActivity.getInstance().getApplicationContext(), R.drawable.shape));

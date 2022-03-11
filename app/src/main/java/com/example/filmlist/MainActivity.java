@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public MessagesApi messagesApi;
     public Call<Films> messages;
     public static long selectedFilm = 0;
+    public static long selectedGenre = -1;
 
     public static int start_films = 0;
     public static int end_films = 0;
