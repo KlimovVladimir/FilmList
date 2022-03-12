@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.filmlist.App;
 import com.example.filmlist.MainActivity;
 import com.example.filmlist.R;
 import com.example.filmlist.items.Film;
@@ -69,52 +70,52 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.genre.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.selectedGenre = position;
+                        App.selectedGenre = position;
                         notifyDataSetChanged();
                         //data.subList(startIndex, endIndex).clear();
                         //adapter.notifyItemRangeRemoved(startIndex, count);
                         ArrayList<Film> insert_films = new ArrayList<>();
-                        int count = MainActivity.end_films - MainActivity.start_films;
-                        MainActivity.getInstance().items.subList(MainActivity.start_films, MainActivity.end_films).clear();
-                        MainActivity.listFragment.adapter.notifyItemRangeRemoved(MainActivity.start_films, count);
+                        int count = App.end_films - App.start_films;
+                        App.getInstance().items.subList(App.start_films, App.end_films).clear();
+                        MainActivity.listFragment.adapter.notifyItemRangeRemoved(App.start_films, count);
 
-                        for (int i = 0; i < MainActivity.getInstance().films.size(); i++) {
-                            for (int j = 0; j < MainActivity.getInstance().films.get(i).getGenres().size(); j++) {
-                                if (MainActivity.getInstance().films.get(i).getGenres().get(j).equals(genre.getGenre())) {
-                                    insert_films.add(MainActivity.getInstance().films.get(i));
+                        for (int i = 0; i < App.getInstance().films.size(); i++) {
+                            for (int j = 0; j < App.getInstance().films.get(i).getGenres().size(); j++) {
+                                if (App.getInstance().films.get(i).getGenres().get(j).equals(genre.getGenre())) {
+                                    insert_films.add(App.getInstance().films.get(i));
                                     break;
                                 }
                             }
                         }
-                        MainActivity.getInstance().items.addAll(MainActivity.start_films, insert_films);
-                        MainActivity.listFragment.adapter.notifyItemRangeInserted(MainActivity.start_films, MainActivity.getInstance().items.size());
-                        MainActivity.end_films = MainActivity.getInstance().items.size();
+                        App.getInstance().items.addAll(App.start_films, insert_films);
+                        MainActivity.listFragment.adapter.notifyItemRangeInserted(App.start_films, App.getInstance().items.size());
+                        App.end_films = App.getInstance().items.size();
                     }
                 });
                 holder.genre_back.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.selectedGenre = position;
+                        App.selectedGenre = position;
                         notifyDataSetChanged();
                         ArrayList<Film> insert_films = new ArrayList<>();
-                        int count = MainActivity.end_films - MainActivity.start_films;
-                        MainActivity.getInstance().items.subList(MainActivity.start_films, MainActivity.end_films).clear();
-                        MainActivity.listFragment.adapter.notifyItemRangeRemoved(MainActivity.start_films, count);
+                        int count = App.end_films - App.start_films;
+                        App.getInstance().items.subList(App.start_films, App.end_films).clear();
+                        MainActivity.listFragment.adapter.notifyItemRangeRemoved(App.start_films, count);
 
-                        for (int i = 0; i < MainActivity.getInstance().films.size(); i++) {
-                            for (int j = 0; j < MainActivity.getInstance().films.get(i).getGenres().size(); j++) {
-                                if (MainActivity.getInstance().films.get(i).getGenres().get(j).equals(genre.getGenre())) {
-                                    insert_films.add(MainActivity.getInstance().films.get(i));
+                        for (int i = 0; i < App.getInstance().films.size(); i++) {
+                            for (int j = 0; j < App.getInstance().films.get(i).getGenres().size(); j++) {
+                                if (App.getInstance().films.get(i).getGenres().get(j).equals(genre.getGenre())) {
+                                    insert_films.add(App.getInstance().films.get(i));
                                     break;
                                 }
                             }
                         }
-                        MainActivity.getInstance().items.addAll(MainActivity.start_films, insert_films);
-                        MainActivity.listFragment.adapter.notifyItemRangeInserted(MainActivity.start_films, MainActivity.getInstance().items.size());
-                        MainActivity.end_films = MainActivity.getInstance().items.size();
+                        App.getInstance().items.addAll(App.start_films, insert_films);
+                        MainActivity.listFragment.adapter.notifyItemRangeInserted(App.start_films, App.getInstance().items.size());
+                        App.end_films = App.getInstance().items.size();
                     }
                 });
-                if (MainActivity.selectedGenre == position)
+                if (App.selectedGenre == position)
                     holder.genre_back.setBackground(ContextCompat.getDrawable(MainActivity.getInstance().getApplicationContext(), R.drawable.shape_blue));
                 else
                     holder.genre_back.setBackground(ContextCompat.getDrawable(MainActivity.getInstance().getApplicationContext(), R.drawable.shape));
@@ -134,7 +135,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.film_name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getInstance().selectedFilm = film.getID();
+                        App.getInstance().selectedFilm = film.getID();
                         MainActivity.fTrans = MainActivity.getInstance().getSupportFragmentManager().beginTransaction();
                         MainActivity.fTrans.replace(R.id.ListFragment, MainActivity.filmFragment);
                         MainActivity.fTrans.addToBackStack(null);
@@ -144,7 +145,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getInstance().selectedFilm = film.getID();
+                        App.getInstance().selectedFilm = film.getID();
                         MainActivity.fTrans = MainActivity.getInstance().getSupportFragmentManager().beginTransaction();
                         MainActivity.fTrans.replace(R.id.ListFragment, MainActivity.filmFragment);
                         MainActivity.fTrans.addToBackStack(null);
@@ -154,7 +155,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ListViewHolder
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getInstance().selectedFilm = film.getID();
+                        App.getInstance().selectedFilm = film.getID();
                         MainActivity.fTrans = MainActivity.getInstance().getSupportFragmentManager().beginTransaction();
                         MainActivity.fTrans.replace(R.id.ListFragment, MainActivity.filmFragment);
                         MainActivity.fTrans.addToBackStack(null);

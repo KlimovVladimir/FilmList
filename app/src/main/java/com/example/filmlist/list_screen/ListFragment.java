@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.Toast;
 
+import com.example.filmlist.App;
 import com.example.filmlist.MainActivity;
 import com.example.filmlist.R;
 import com.example.filmlist.items.Film;
@@ -58,7 +59,7 @@ public class ListFragment extends Fragment {
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                int type = MainActivity.getInstance().items.get(position).getItemType();
+                int type = App.getInstance().items.get(position).getItemType();
                 if (type == 0) position = 2;
                 else if (type == 1) position = 2;
                 else position = 1;
@@ -68,7 +69,7 @@ public class ListFragment extends Fragment {
         });
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new AdapterList(MainActivity.getInstance().items);
+        adapter = new AdapterList(App.getInstance().items);
         recyclerView.setAdapter(adapter);
         return view;
     }

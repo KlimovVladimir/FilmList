@@ -28,9 +28,9 @@ public class FilmFragment extends Fragment {
         ImageView img;
 
         Film film = null;
-        for (int i = 0; i < MainActivity.getInstance().films.size(); i++) {
-            film = (Film) MainActivity.getInstance().films.get(i);
-            if (film.getID() == MainActivity.getInstance().selectedFilm) {
+        for (int i = 0; i < App.getInstance().films.size(); i++) {
+            film = (Film) App.getInstance().films.get(i);
+            if (film.getID() == App.getInstance().selectedFilm) {
                 break;
             }
         }
